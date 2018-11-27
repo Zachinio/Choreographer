@@ -8,7 +8,7 @@ import io.reactivex.subjects.SingleSubject
 import zachinio.choreograper.Choreographer
 import java.lang.ref.WeakReference
 
-internal abstract class Animation{
+internal abstract class Animation {
 
     internal val viewPositionSingle: SingleSubject<Point> = SingleSubject.create()
     var async = false
@@ -28,6 +28,12 @@ internal abstract class Animation{
                     duration
                 )
                 Choreographer.AnimationType.SCALE -> ScaleAnimation(
+                    viewWeak,
+                    direction,
+                    animationType,
+                    duration
+                )
+                Choreographer.AnimationType.FADE -> FadeAnimation(
                     viewWeak,
                     direction,
                     animationType,

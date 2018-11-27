@@ -5,10 +5,9 @@ import android.view.animation.AnimationUtils
 import io.reactivex.Completable
 import zachinio.choreograper.Choreographer
 import zachinio.choreograper.R
-
 import java.lang.ref.WeakReference
 
-internal class ScaleAnimation(
+internal class FadeAnimation(
     private val viewWeak: WeakReference<View>,
     private val direction: Choreographer.Direction,
     private val animationType: Choreographer.AnimationType,
@@ -18,7 +17,7 @@ internal class ScaleAnimation(
     override fun animate(): Completable {
         setVisibilityState(false)
         return Completable.create {
-            val scaleAnimation = getScaleAnimation()
+            val scaleAnimation = getFadeAnimation()
             scaleAnimation?.duration = duration
             scaleAnimation?.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
                 override fun onAnimationRepeat(p0: android.view.animation.Animation?) {
@@ -38,15 +37,15 @@ internal class ScaleAnimation(
         }
     }
 
-    private fun getScaleAnimation(): android.view.animation.Animation? {
+    private fun getFadeAnimation(): android.view.animation.Animation? {
         return when (direction) {
-            Choreographer.Direction.UP -> {
+            Choreographer.Direction.IN -> {
                 viewWeak.get()?.visibility = View.INVISIBLE
-                AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.scale_up)
+                AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.fade_in)
             }
-            Choreographer.Direction.DOWN -> {
+            Choreographer.Direction.OUT -> {
                 viewWeak.get()?.visibility = View.VISIBLE
-                AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.scale_down)
+                AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.fade_out)
             }
             else -> throw IllegalStateException(direction.name + " can't be used with " + animationType.name)
         }
@@ -54,9 +53,9 @@ internal class ScaleAnimation(
 
     private fun setVisibilityState(isEndingState: Boolean) {
         when (direction) {
-            Choreographer.Direction.UP -> viewWeak.get()?.visibility =
+            Choreographer.Direction.IN -> viewWeak.get()?.visibility =
                     if (isEndingState) View.VISIBLE else View.INVISIBLE
-            Choreographer.Direction.DOWN -> viewWeak.get()?.visibility =
+            Choreographer.Direction.OUT -> viewWeak.get()?.visibility =
                     if (isEndingState) View.INVISIBLE else View.VISIBLE
             else -> {
                 throw IllegalStateException(direction.name + " can't be used with " + animationType.name)

@@ -55,10 +55,10 @@ class Choreographer {
     }
 
     enum class Direction {
-        TOP, RIGHT, BOTTOM, LEFT, UP, DOWN
+        TOP, RIGHT, BOTTOM, LEFT, UP, DOWN, OUT, IN
     }
 
     enum class AnimationType {
-        ENTER, SCALE
+        ENTER, SCALE, FADE
     }
 }
