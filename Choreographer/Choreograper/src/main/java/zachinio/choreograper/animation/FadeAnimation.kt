@@ -7,7 +7,7 @@ import zachinio.choreograper.Choreographer
 import zachinio.choreograper.R
 import java.lang.ref.WeakReference
 
-internal class FadeAnimation(
+class FadeAnimation(
     private val viewWeak: WeakReference<View>,
     private val direction: Choreographer.Direction,
     private val animationType: Choreographer.AnimationType,

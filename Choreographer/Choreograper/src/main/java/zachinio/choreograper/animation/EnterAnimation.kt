@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import zachinio.choreograper.Choreographer
 import java.lang.ref.WeakReference
 
-internal class EnterAnimation(
+class EnterAnimation(
     private val viewWeak: WeakReference<View>,
     private val direction: Choreographer.Direction,
     private val animationType: Choreographer.AnimationType,

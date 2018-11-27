@@ -8,7 +8,7 @@ import io.reactivex.subjects.SingleSubject
 import zachinio.choreograper.Choreographer
 import java.lang.ref.WeakReference
 
-internal abstract class Animation {
+abstract class Animation {
 
     internal val viewPositionSingle: SingleSubject<Point> = SingleSubject.create()
     var async = false

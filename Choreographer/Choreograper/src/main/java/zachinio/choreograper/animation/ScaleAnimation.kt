@@ -8,7 +8,7 @@ import zachinio.choreograper.R
 
 import java.lang.ref.WeakReference
 
-internal class ScaleAnimation(
+class ScaleAnimation(
     private val viewWeak: WeakReference<View>,
     private val direction: Choreographer.Direction,
     private val animationType: Choreographer.AnimationType,
