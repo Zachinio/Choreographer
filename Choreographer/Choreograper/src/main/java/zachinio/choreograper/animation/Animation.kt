@@ -45,7 +45,6 @@ internal abstract class Animation{
             override fun onGlobalLayout() {
                 viewWeak.get()?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
                 viewPositionSingle.onSuccess(Point(viewWeak.get()?.x?.toInt()!!, viewWeak.get()?.y?.toInt()!!))
-                viewWeak.get()?.visibility = View.INVISIBLE
             }
         })
     }
