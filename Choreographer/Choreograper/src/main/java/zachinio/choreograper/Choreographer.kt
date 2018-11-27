@@ -18,16 +18,16 @@ class Choreographer {
 
     private val animations = ArrayList<Animation>()
 
-    fun addAnimation(view: View, direction: Direction, animationType: AnimationType, duration: Long): Choreographer {
+    fun addAnimation(view: View, direction: Animation.Direction, animationType: Animation.AnimationType, duration: Long): Choreographer {
         animations.add(Animation.create(WeakReference(view), direction, animationType, duration))
         return this
     }
 
     fun addAnimationAsync(
-        view: View,
-        direction: Direction,
-        animationType: AnimationType,
-        duration: Long
+            view: View,
+            direction: Animation.Direction,
+            animationType: Animation.AnimationType,
+            duration: Long
     ): Choreographer {
         val animation = Animation.create(WeakReference(view), direction, animationType, duration)
         animation.async = true
@@ -64,13 +64,5 @@ class Choreographer {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe()
-    }
-
-    enum class Direction {
-        TOP, RIGHT, BOTTOM, LEFT, UP, DOWN, OUT, IN
-    }
-
-    enum class AnimationType {
-        ENTER, SCALE, FADE
     }
 }

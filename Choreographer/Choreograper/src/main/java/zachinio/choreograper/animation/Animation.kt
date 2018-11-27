@@ -16,30 +16,31 @@ abstract class Animation {
 
     companion object {
         fun create(
-            viewWeak: WeakReference<View>,
-            direction: Choreographer.Direction,
-            animationType: Choreographer.AnimationType,
-            duration: Long
+                viewWeak: WeakReference<View>,
+                direction: Direction,
+                animationType: AnimationType,
+                duration: Long
         ): Animation {
             return when (animationType) {
-                Choreographer.AnimationType.ENTER -> EnterAnimation(
-                    viewWeak,
-                    direction,
-                    animationType,
-                    duration
+                AnimationType.ENTER -> EnterAnimation(
+                        viewWeak,
+                        direction,
+                        animationType,
+                        duration
                 )
-                Choreographer.AnimationType.SCALE -> ScaleAnimation(
-                    viewWeak,
-                    direction,
-                    animationType,
-                    duration
+                AnimationType.SCALE -> ScaleAnimation(
+                        viewWeak,
+                        direction,
+                        animationType,
+                        duration
                 )
-                Choreographer.AnimationType.FADE -> FadeAnimation(
-                    viewWeak,
-                    direction,
-                    animationType,
-                    duration
+                AnimationType.FADE -> FadeAnimation(
+                        viewWeak,
+                        direction,
+                        animationType,
+                        duration
                 )
+                Animation.AnimationType.MOVE -> TODO()
             }
         }
     }
@@ -48,11 +49,19 @@ abstract class Animation {
 
     internal fun getViewPosition(viewWeak: WeakReference<View>) {
         viewWeak.get()?.viewTreeObserver?.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
+                ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 viewWeak.get()?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
                 viewPositionSingle.onSuccess(Point(viewWeak.get()?.x?.toInt()!!, viewWeak.get()?.y?.toInt()!!))
             }
         })
+    }
+
+    enum class Direction {
+        TOP, RIGHT, BOTTOM, LEFT, UP, DOWN, OUT, IN
+    }
+
+    enum class AnimationType {
+        ENTER, SCALE, FADE,MOVE
     }
 }
