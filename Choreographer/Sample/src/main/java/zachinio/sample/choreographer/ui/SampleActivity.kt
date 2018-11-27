@@ -15,7 +15,7 @@ class SampleActivity : Activity() {
 
         Choreographer.get()
             .addAnimation(helloWorld, Choreographer.Direction.TOP, Choreographer.AnimationType.ENTER, 560)
-            .addAnimationAsync(childView, Choreographer.Direction.LEFT, Choreographer.AnimationType.ENTER, 560)
+            .addAnimationAsync(childView, Choreographer.Direction.UP, Choreographer.AnimationType.SCALE, 2560)
             .animate()
     }
 }

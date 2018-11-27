@@ -54,11 +54,11 @@ class Choreographer {
             .subscribe()
     }
 
-    enum class Direction(value: Int) {
-        TOP(1), RIGHT(2), BOTTOM(3), LEFT(4), UP(5), DOWN(6)
+    enum class Direction {
+        TOP, RIGHT, BOTTOM, LEFT, UP, DOWN
     }
 
-    enum class AnimationType(value: Int) {
-        ENTER(1), SCALE(2)
+    enum class AnimationType {
+        ENTER, SCALE
     }
 }

@@ -67,7 +67,7 @@ internal class EnterAnimation(
             Choreographer.Direction.BOTTOM -> viewWeak.get()?.y = displayMetrics?.heightPixels!! +
                     viewWeak.get()?.height?.toFloat()!!
             Choreographer.Direction.LEFT -> viewWeak.get()?.x = 0 - viewWeak.get()?.width?.toFloat()!!
-            else -> throw IllegalStateException(direction.name + " Can't be used with " + animationType.name)
+            else -> throw IllegalStateException(direction.name + " can't be used with " + animationType.name)
         }
     }
 }

@@ -20,14 +20,19 @@ internal abstract class Animation{
             animationType: Choreographer.AnimationType,
             duration: Long
         ): Animation {
-            when (animationType) {
-                Choreographer.AnimationType.ENTER -> return EnterAnimation(
+            return when (animationType) {
+                Choreographer.AnimationType.ENTER -> EnterAnimation(
                     viewWeak,
                     direction,
                     animationType,
                     duration
                 )
-                Choreographer.AnimationType.SCALE -> TODO()
+                Choreographer.AnimationType.SCALE -> ScaleAnimation(
+                    viewWeak,
+                    direction,
+                    animationType,
+                    duration
+                )
             }
         }
     }
