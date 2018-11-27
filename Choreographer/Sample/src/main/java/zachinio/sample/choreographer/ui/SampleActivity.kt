@@ -16,6 +16,7 @@ class SampleActivity : Activity() {
         Choreographer.get()
             .addAnimation(helloWorld, Choreographer.Direction.TOP, Choreographer.AnimationType.ENTER, 560)
             .addAnimation(childView, Choreographer.Direction.DOWN, Choreographer.AnimationType.SCALE, 560)
+            .wait(3000)
             .addAnimation(childView2, Choreographer.Direction.IN, Choreographer.AnimationType.FADE, 560)
             .animate()
     }

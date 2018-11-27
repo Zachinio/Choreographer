@@ -12,6 +12,7 @@ internal abstract class Animation {
 
     internal val viewPositionSingle: SingleSubject<Point> = SingleSubject.create()
     var async = false
+    var wait: Long? = null
 
     companion object {
         fun create(

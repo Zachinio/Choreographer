@@ -4,6 +4,7 @@ import android.view.View
 import io.reactivex.android.schedulers.AndroidSchedulers
 import zachinio.choreograper.animation.Animation
 import java.lang.ref.WeakReference
+import java.util.concurrent.TimeUnit
 
 class Choreographer {
 
@@ -34,6 +35,14 @@ class Choreographer {
         return this
     }
 
+    fun wait(mills: Long) : Choreographer {
+        if (animations.size == 0) {
+            throw IllegalStateException("wait must be used after addAnimation")
+        }
+        animations.last().wait = mills
+        return this
+    }
+
     fun animate() {
         if (animations.isEmpty()) {
             return
@@ -45,6 +54,9 @@ class Choreographer {
                 completable.mergeWith(animations[0].animate())
             } else {
                 completable.concatWith(animations[0].animate())
+            }
+            animations[0].wait?.let {
+                completable = completable.delay(it, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread())
             }
             animations.removeAt(0)
         }
