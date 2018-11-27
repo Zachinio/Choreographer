@@ -1,2 +1,2 @@
-# Choreographer---Android
+# Choreographer - Android
 A library to animate views easily 
