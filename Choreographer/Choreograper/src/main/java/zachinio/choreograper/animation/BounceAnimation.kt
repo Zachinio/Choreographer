@@ -14,9 +14,16 @@ class BounceAnimation(view: View, private val duration: Long) : Animation() {
         return Completable.create {
             val bounceAnimation = AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.bounce)
             bounceAnimation.duration = duration
-            bounceAnimation.setAnimationListener(object : AnimationListener() {
+            bounceAnimation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                override fun onAnimationRepeat(p0: android.view.animation.Animation?) {
+
+                }
+
                 override fun onAnimationEnd(p0: android.view.animation.Animation?) {
                     it.onComplete()
+                }
+
+                override fun onAnimationStart(p0: android.view.animation.Animation?) {
                 }
             })
             viewWeak.get()?.startAnimation(bounceAnimation)

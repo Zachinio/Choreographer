@@ -24,17 +24,7 @@ class MoveAnimation(
             animatorSet.duration = duration
             animatorSet.removeAllListeners()
             animatorSet.playTogether(objectAnimatorX, objectAnimatorY)
-            animatorSet.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(p0: Animator?) {
-
-                }
-
-                override fun onAnimationCancel(p0: Animator?) {
-                }
-
-                override fun onAnimationStart(p0: Animator?) {
-                }
-
+            animatorSet.addListener(object : AnimationListener(){
                 override fun onAnimationEnd(p0: Animator?) {
                     it.onComplete()
                 }

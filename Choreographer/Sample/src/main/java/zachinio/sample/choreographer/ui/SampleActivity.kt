@@ -16,7 +16,8 @@ class SampleActivity : Activity() {
 
         Choreographer.get()
             .addAnimation(EnterAnimation(helloWorld, EnterAnimation.Direction.TOP, 560))
-            .addAnimation(ScaleAnimation(childView, 0.5f, 0.5f, 560))
+            .addAnimation(FadeAnimation(childView,0.2f,560))
+            .addAnimationAsync(ScaleAnimation(childView, 0.5f, 0.5f, 560))
             .addAnimation(BounceAnimation(childView2, 50))
             .animate()
     }
