@@ -1,10 +1,34 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+ext {
+    bintrayRepo = 'Choreographer'
+    bintrayName = 'zachinio.choreographer'
+    libraryName = 'Choreographer'
+
+    publishedGroupId = 'zachinio.choreographer'
+    artifact = 'choreographer'
+
+    libraryDescription = 'A library to animte views'
+
+    siteUrl = 'https://github.com/ZachBublil/Choreographer'
+    gitUrl = 'https://github.com/ZachBublil/Choreographer.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'zachbublil'
+    developerName = 'Zach Bublil'
+    developerEmail = 'zachbublil@gmail.com'
+
+    licenseName = 'MIT'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}
 
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 17
@@ -33,4 +57,9 @@ dependencies {
 
 repositories {
     mavenCentral()
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 }
