@@ -1,9 +1,7 @@
 package zachinio.choreograper
 
-import android.view.View
 import io.reactivex.android.schedulers.AndroidSchedulers
 import zachinio.choreograper.animation.Animation
-import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
 class Choreographer {
@@ -18,24 +16,17 @@ class Choreographer {
 
     private val animations = ArrayList<Animation>()
 
-    fun addAnimation(view: View, direction: Animation.Direction, animationType: Animation.AnimationType, duration: Long): Choreographer {
-        animations.add(Animation.create(WeakReference(view), direction, animationType, duration))
-        return this
-    }
-
-    fun addAnimationAsync(
-            view: View,
-            direction: Animation.Direction,
-            animationType: Animation.AnimationType,
-            duration: Long
-    ): Choreographer {
-        val animation = Animation.create(WeakReference(view), direction, animationType, duration)
-        animation.async = true
+    fun addAnimation(animation: Animation): Choreographer {
         animations.add(animation)
         return this
     }
 
-    fun wait(mills: Long) : Choreographer {
+    fun addAnimationAsync(animation: Animation): Choreographer {
+        animation.async = true
+        return addAnimation(animation)
+    }
+
+    fun wait(mills: Long): Choreographer {
         if (animations.size == 0) {
             throw IllegalStateException("wait must be used after addAnimation")
         }

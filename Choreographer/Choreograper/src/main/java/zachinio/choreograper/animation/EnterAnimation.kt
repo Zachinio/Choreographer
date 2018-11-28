@@ -7,15 +7,11 @@ import android.view.View
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import zachinio.choreograper.Choreographer
 import java.lang.ref.WeakReference
 
-class EnterAnimation(
-    private val viewWeak: WeakReference<View>,
-    private val direction: Choreographer.Direction,
-    private val animationType: Choreographer.AnimationType,
-    private val duration: Long
-) : Animation() {
+class EnterAnimation(view: View, private val direction: Direction, private val duration: Long) : Animation() {
+
+    private var viewWeak: WeakReference<View> = WeakReference(view)
 
     init {
         getViewPosition(viewWeak)
@@ -61,13 +57,16 @@ class EnterAnimation(
     private fun setStartingPosition() {
         val displayMetrics = viewWeak.get()?.resources?.displayMetrics
         when (direction) {
-            Choreographer.Direction.TOP -> viewWeak.get()?.y = 0 - viewWeak.get()?.height?.toFloat()!!
-            Choreographer.Direction.RIGHT -> viewWeak.get()?.x = displayMetrics?.widthPixels!! +
+            Direction.TOP -> viewWeak.get()?.y = 0 - viewWeak.get()?.height?.toFloat()!!
+            Direction.RIGHT -> viewWeak.get()?.x = displayMetrics?.widthPixels!! +
                     viewWeak.get()?.width?.toFloat()!!
-            Choreographer.Direction.BOTTOM -> viewWeak.get()?.y = displayMetrics?.heightPixels!! +
+            Direction.BOTTOM -> viewWeak.get()?.y = displayMetrics?.heightPixels!! +
                     viewWeak.get()?.height?.toFloat()!!
-            Choreographer.Direction.LEFT -> viewWeak.get()?.x = 0 - viewWeak.get()?.width?.toFloat()!!
-            else -> throw IllegalStateException(direction.name + " can't be used with " + animationType.name)
+            Direction.LEFT -> viewWeak.get()?.x = 0 - viewWeak.get()?.width?.toFloat()!!
         }
+    }
+
+    enum class Direction {
+        TOP, RIGHT, BOTTOM, LEFT
     }
 }

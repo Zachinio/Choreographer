@@ -8,10 +8,13 @@ import io.reactivex.Completable
 import java.lang.ref.WeakReference
 
 class MoveAnimation(
-        private val viewWeak: WeakReference<View>,
-        private val x: Int,
-        private val y: Int,
-        private val duration: Long) : Animation() {
+    private val view: View,
+    private val x: Int,
+    private val y: Int,
+    private val duration: Long
+) : Animation() {
+
+    private val viewWeak = WeakReference(view)
 
     override fun animate(): Completable {
         return Completable.create {
