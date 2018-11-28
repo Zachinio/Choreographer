@@ -1,57 +1,41 @@
 package zachinio.choreograper.animation
 
+import android.animation.Animator
 import android.view.View
-import android.view.animation.AnimationUtils
 import io.reactivex.Completable
-import zachinio.choreograper.R
 import java.lang.ref.WeakReference
 
 class ScaleAnimation(
     view: View,
-    private val direction: Direction,
+    private val xScale: Float,
+    private val yScale: Float,
     private val duration: Long
 ) : Animation() {
 
     private var viewWeak: WeakReference<View> = WeakReference(view)
 
     override fun animate(): Completable {
-        setVisibilityState(false)
         return Completable.create {
-            val scaleAnimation = getScaleAnimation()
-            scaleAnimation?.duration = duration
-            scaleAnimation?.setAnimationListener(object : AnimationListener() {
-                override fun onAnimationEnd(p0: android.view.animation.Animation?) {
-                    it.onComplete()
-                }
-            })
-            viewWeak.get()?.startAnimation(scaleAnimation)
-            setVisibilityState(true)
-        }
-    }
+            viewWeak.get()
+                ?.animate()
+                ?.setDuration(duration)
+                ?.scaleX(xScale)
+                ?.scaleY(yScale)
+                ?.setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationRepeat(p0: Animator?) {
 
-    private fun getScaleAnimation(): android.view.animation.Animation? {
-        return when (direction) {
-            Direction.UP -> {
-                viewWeak.get()?.visibility = View.INVISIBLE
-                AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.scale_up)
-            }
-            Direction.DOWN -> {
-                viewWeak.get()?.visibility = View.VISIBLE
-                AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.scale_down)
-            }
-        }
-    }
+                    }
 
-    private fun setVisibilityState(isEndingState: Boolean) {
-        when (direction) {
-            Direction.UP -> viewWeak.get()?.visibility =
-                    if (isEndingState) View.VISIBLE else View.INVISIBLE
-            Direction.DOWN -> viewWeak.get()?.visibility =
-                    if (isEndingState) View.INVISIBLE else View.VISIBLE
-        }
-    }
+                    override fun onAnimationCancel(p0: Animator?) {
+                    }
 
-    enum class Direction {
-        UP, DOWN
+                    override fun onAnimationStart(p0: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(p0: Animator?) {
+                        it.onComplete()
+                    }
+                })
+        }
     }
 }
