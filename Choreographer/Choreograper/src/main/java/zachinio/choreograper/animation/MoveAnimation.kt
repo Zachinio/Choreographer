@@ -8,7 +8,7 @@ import io.reactivex.Completable
 import java.lang.ref.WeakReference
 
 class MoveAnimation(
-    private val view: View,
+    view: View,
     private val x: Int,
     private val y: Int,
     private val duration: Long

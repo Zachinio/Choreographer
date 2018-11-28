@@ -19,15 +19,7 @@ class FadeAnimation(
         return Completable.create {
             val scaleAnimation = getFadeAnimation()
             scaleAnimation?.duration = duration
-            scaleAnimation?.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
-                override fun onAnimationRepeat(p0: android.view.animation.Animation?) {
-
-                }
-
-                override fun onAnimationStart(p0: android.view.animation.Animation?) {
-
-                }
-
+            scaleAnimation?.setAnimationListener(object : AnimationListener() {
                 override fun onAnimationEnd(p0: android.view.animation.Animation?) {
                     it.onComplete()
                 }
