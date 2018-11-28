@@ -3,17 +3,16 @@ package zachinio.choreograper.animation
 import android.view.View
 import android.view.animation.AnimationUtils
 import io.reactivex.Completable
-import zachinio.choreograper.Choreographer
 import zachinio.choreograper.R
-
 import java.lang.ref.WeakReference
 
 class ScaleAnimation(
-    private val viewWeak: WeakReference<View>,
-    private val direction: Choreographer.Direction,
-    private val animationType: Choreographer.AnimationType,
+    view: View,
+    private val direction: Direction,
     private val duration: Long
 ) : Animation() {
+
+    private var viewWeak: WeakReference<View> = WeakReference(view)
 
     override fun animate(): Completable {
         setVisibilityState(false)
@@ -40,27 +39,27 @@ class ScaleAnimation(
 
     private fun getScaleAnimation(): android.view.animation.Animation? {
         return when (direction) {
-            Choreographer.Direction.UP -> {
+            Direction.UP -> {
                 viewWeak.get()?.visibility = View.INVISIBLE
                 AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.scale_up)
             }
-            Choreographer.Direction.DOWN -> {
+            Direction.DOWN -> {
                 viewWeak.get()?.visibility = View.VISIBLE
                 AnimationUtils.loadAnimation(viewWeak.get()?.context, R.anim.scale_down)
             }
-            else -> throw IllegalStateException(direction.name + " can't be used with " + animationType.name)
         }
     }
 
     private fun setVisibilityState(isEndingState: Boolean) {
         when (direction) {
-            Choreographer.Direction.UP -> viewWeak.get()?.visibility =
+            Direction.UP -> viewWeak.get()?.visibility =
                     if (isEndingState) View.VISIBLE else View.INVISIBLE
-            Choreographer.Direction.DOWN -> viewWeak.get()?.visibility =
+            Direction.DOWN -> viewWeak.get()?.visibility =
                     if (isEndingState) View.INVISIBLE else View.VISIBLE
-            else -> {
-                throw IllegalStateException(direction.name + " can't be used with " + animationType.name)
-            }
         }
+    }
+
+    enum class Direction {
+        UP, DOWN
     }
 }

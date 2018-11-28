@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import zachinio.choreograper.Choreographer
+import zachinio.choreograper.animation.*
 import zachinio.sample.choreographer.R
 
 
@@ -14,10 +15,12 @@ class SampleActivity : Activity() {
         setContentView(R.layout.activity_main)
 
         Choreographer.get()
-            .addAnimation(helloWorld, Choreographer.Direction.TOP, Choreographer.AnimationType.ENTER, 560)
-            .addAnimation(childView, Choreographer.Direction.DOWN, Choreographer.AnimationType.SCALE, 560)
+            .addAnimation(EnterAnimation(helloWorld, EnterAnimation.Direction.TOP, 560))
+            .addAnimation(ScaleAnimation(childView, ScaleAnimation.Direction.DOWN, 560))
             .wait(3000)
-            .addAnimation(childView2, Choreographer.Direction.IN, Choreographer.AnimationType.FADE, 560)
+            .addAnimation(FadeAnimation(childView2, FadeAnimation.Direction.IN, 560))
+            .addAnimation(MoveAnimation(childView2,600,600,1200))
             .animate()
+
     }
 }
