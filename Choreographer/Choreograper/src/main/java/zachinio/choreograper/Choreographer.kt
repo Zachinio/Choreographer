@@ -1,8 +1,8 @@
 package zachinio.choreograper
 
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import zachinio.choreograper.animation.Animation
-import java.util.concurrent.TimeUnit
 
 class Choreographer {
 
@@ -38,22 +38,40 @@ class Choreographer {
         if (animations.isEmpty()) {
             return
         }
-        var completable = animations[0].animate()
-        animations.removeAt(0)
+
+        var completable =
+            getAsyncAnimations()?.let {
+                it
+            } ?: run {
+                animations.removeAt(0).animate()
+            }
         while (animations.isNotEmpty()) {
-            completable = if (animations[0].async) {
-                completable.mergeWith(animations[0].animate())
-            } else {
-                completable.concatWith(animations[0].animate())
+            val animation = animations[0]
+            val animationCompletable = getAsyncAnimations()?.let {
+                it
+            } ?: run {
+                animations.removeAt(0).animate()
             }
-            animations[0].wait?.let {
-                completable = completable.delay(it, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread())
-            }
-            animations.removeAt(0)
+            completable = animationCompletable.startWith(completable)
+
+//            animation.wait?.let {
+//                completable = completable.delay(it, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread())
+//            }
         }
         completable
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe()
+    }
+
+    private fun getAsyncAnimations(): Completable? {
+        if (animations.size < 2 || !animations[1].async) {
+            return null
+        }
+        var completable = animations.removeAt(0).animate()
+        while (animations.isNotEmpty() && animations[0].async) {
+            completable = completable.mergeWith(animations.removeAt(0).animate())
+        }
+        return completable
     }
 }
