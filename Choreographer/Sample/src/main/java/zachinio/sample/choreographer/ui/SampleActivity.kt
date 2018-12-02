@@ -20,7 +20,6 @@ class SampleActivity : Activity() {
             .addAnimationAsync(ScaleAnimation(childView, 0.5f, 0.5f, 560))
             .addAnimation(BounceAnimation(childView2, 50))
             .addAnimation(FadeAnimation(childView,1f,560))
-
             .animate()
     }
 }

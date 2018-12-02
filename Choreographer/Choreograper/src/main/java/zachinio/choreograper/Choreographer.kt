@@ -43,20 +43,17 @@ class Choreographer {
             getAsyncAnimations()?.let {
                 it
             } ?: run {
-                animations.removeAt(0).animate()
+                animations.removeAt(0).getAnimation()
             }
         while (animations.isNotEmpty()) {
-            val animation = animations[0]
             val animationCompletable = getAsyncAnimations()?.let {
                 it
             } ?: run {
-                animations.removeAt(0).animate()
+                animations.removeAt(0).getAnimation()
             }
+
             completable = animationCompletable.startWith(completable)
 
-//            animation.wait?.let {
-//                completable = completable.delay(it, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread())
-//            }
         }
         completable
             .observeOn(AndroidSchedulers.mainThread())
@@ -68,9 +65,9 @@ class Choreographer {
         if (animations.size < 2 || !animations[1].async) {
             return null
         }
-        var completable = animations.removeAt(0).animate()
+        var completable = animations.removeAt(0).getAnimation()
         while (animations.isNotEmpty() && animations[0].async) {
-            completable = completable.mergeWith(animations.removeAt(0).animate())
+            completable = completable.mergeWith(animations.removeAt(0).getAnimation())
         }
         return completable
     }
