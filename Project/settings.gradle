@@ -1,1 +1,1 @@
-include ':Sample', ':Choreographer'
+include ':Sample', ':choreographer'

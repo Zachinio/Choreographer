@@ -9,7 +9,7 @@ ext {
     libraryName = 'Choreographer'
 
     publishedGroupId = 'zachinio.choreographer'
-    artifact = 'Choreographer'
+    artifact = 'choreographer'
 
     libraryDescription = 'A library to animte views'
 
