@@ -3,8 +3,8 @@ package zachinio.sample.choreographer.ui
 import android.app.Activity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
-import zachinio.choreograper.Choreographer
-import zachinio.choreograper.animation.*
+import zachinio.choreographer.Choreographer
+import zachinio.choreographer.animation.*
 import zachinio.sample.choreographer.R
 
 

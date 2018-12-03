@@ -1,8 +1,8 @@
-package zachinio.choreograper
+package zachinio.choreographer
 
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import zachinio.choreograper.animation.Animation
+import zachinio.choreographer.animation.Animation
 
 class Choreographer {
 

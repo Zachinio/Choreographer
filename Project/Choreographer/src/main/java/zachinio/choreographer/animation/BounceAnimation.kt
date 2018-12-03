@@ -1,9 +1,9 @@
-package zachinio.choreograper.animation
+package zachinio.choreographer.animation
 
 import android.view.View
 import android.view.animation.AnimationUtils
 import io.reactivex.Completable
-import zachinio.choreograper.R
+import zachinio.choreographer.R
 import java.lang.ref.WeakReference
 
 class BounceAnimation(view: View, private val duration: Long) : Animation() {

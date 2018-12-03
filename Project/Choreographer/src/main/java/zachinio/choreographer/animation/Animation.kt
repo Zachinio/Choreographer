@@ -1,4 +1,4 @@
-package zachinio.choreograper.animation
+package zachinio.choreographer.animation
 
 import android.graphics.Point
 import android.view.View
