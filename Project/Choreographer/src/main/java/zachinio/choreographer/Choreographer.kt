@@ -1,5 +1,6 @@
 package zachinio.choreographer
 
+import android.annotation.SuppressLint
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import zachinio.choreographer.animation.Animation
@@ -34,7 +35,21 @@ class Choreographer {
         return this
     }
 
+    fun clearAll() {
+        animations.clear()
+    }
+
+    fun removeLast() {
+        if (!animations.isEmpty()) {
+            animations.removeAt(animations.size - 1)
+        }
+    }
+
     fun animate() {
+        animate(null)
+    }
+
+    fun animate(endAction: (() -> Unit)?) {
         if (animations.isEmpty()) {
             return
         }
@@ -58,7 +73,9 @@ class Choreographer {
         completable
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+            .subscribe {
+                endAction?.invoke()
+            }
     }
 
     private fun getAsyncAnimations(): Completable? {
