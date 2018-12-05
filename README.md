@@ -39,7 +39,7 @@ To add delay between animations
 # Customize animations
 The library contains some basic animations, if you want to chain a custom animation you can make extend from Animation class of the library and perform the animation inside the "animate" method.
 
-#Licensing
+# Licensing
 ```
 Copyright 2018 Zach Bublil
 
