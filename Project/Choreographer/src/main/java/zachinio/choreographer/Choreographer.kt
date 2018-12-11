@@ -1,19 +1,10 @@
 package zachinio.choreographer
 
-import android.annotation.SuppressLint
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import zachinio.choreographer.animation.Animation
 
 class Choreographer {
-
-    companion object {
-        private val instance: Choreographer = Choreographer()
-
-        fun get(): Choreographer {
-            return instance
-        }
-    }
 
     private val animations = ArrayList<Animation>()
 
