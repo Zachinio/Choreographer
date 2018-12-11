@@ -12,14 +12,14 @@ implementation 'zachinio.choreographer:choreographer:1.0.0'
 # How to use
 To run animation serially
 ```
- Choreographer.get()
+ Choreographer()
             .addAnimation(EnterAnimation(view, EnterAnimation.Direction.TOP, 560))
             .addAnimation(FadeAnimation(view,0.2f,560))
             .animate()
 ```
 Use "addAnimationAsync" method to add animations asynchronously
 ```
-  Choreographer.get()
+  Choreographer()
             .addAnimation(EnterAnimation(view, EnterAnimation.Direction.TOP, 560))
             .addAnimation(FadeAnimation(otherView,0.2f,560))
             .addAnimationAsync(ScaleAnimation(otherView, 0.5f, 0.5f, 560))
@@ -28,7 +28,7 @@ Use "addAnimationAsync" method to add animations asynchronously
 
 To add delay between animations
 ```
-   Choreographer.get()
+   Choreographer()
             .addAnimation(EnterAnimation(view, EnterAnimation.Direction.TOP, 560))
             .wait(1900) // mills
             .addAnimation(FadeAnimation(otherView,0.2f,560))
