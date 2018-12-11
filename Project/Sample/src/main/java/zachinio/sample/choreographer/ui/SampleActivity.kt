@@ -14,7 +14,7 @@ class SampleActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Choreographer.get()
+        Choreographer()
             .addAnimation(EnterAnimation(helloWorld, EnterAnimation.Direction.TOP, 560))
             .addAnimation(FadeAnimation(childView,0.2f,560))
             .addAnimationAsync(ScaleAnimation(childView, 0.5f, 0.5f, 560))
