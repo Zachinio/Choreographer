@@ -18,6 +18,10 @@ abstract class Animation {
     internal abstract fun animate(): Completable
 
     internal fun getViewPosition(viewWeak: WeakReference<View>) {
+        if (viewWeak.get()?.x?.toInt() != 0 || viewWeak.get()?.y?.toInt() != 0) {
+            viewPositionSingle.onSuccess(Point(viewWeak.get()?.x?.toInt()!!, viewWeak.get()?.y?.toInt()!!))
+            return
+        }
         viewWeak.get()?.viewTreeObserver?.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {

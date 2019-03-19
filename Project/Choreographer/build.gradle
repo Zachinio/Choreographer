@@ -16,7 +16,7 @@ ext {
     siteUrl = 'https://github.com/ZachBublil/Choreographer'
     gitUrl = 'https://github.com/ZachBublil/Choreographer.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.3'
 
     developerId = 'zachbublil'
     developerName = 'Zach Bublil'
