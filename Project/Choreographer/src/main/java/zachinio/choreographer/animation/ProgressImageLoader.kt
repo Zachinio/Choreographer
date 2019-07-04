@@ -3,6 +3,7 @@ package zachinio.choreographer.animation
 import android.graphics.drawable.ClipDrawable
 import android.os.Handler
 import android.view.Gravity
+import android.view.View
 import android.widget.ImageView
 import io.reactivex.Completable
 import io.reactivex.CompletableEmitter
@@ -26,6 +27,7 @@ class ProgressImageLoader(private val imageView: ImageView, private val step: In
             emitter = it
             drawable = ClipDrawable(imageView.drawable, getDirection(direction), ClipDrawable.HORIZONTAL)
             imageView.setImageDrawable(drawable)
+            imageView.visibility = View.VISIBLE
 
             drawable?.level = level
             handler.post(animateImage)

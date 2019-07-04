@@ -16,7 +16,7 @@ ext {
     siteUrl = 'https://github.com/ZachBublil/Choreographer'
     gitUrl = 'https://github.com/ZachBublil/Choreographer.git'
 
-    libraryVersion = '1.0.4'
+    libraryVersion = '1.0.5'
 
     developerId = 'zachbublil'
     developerName = 'Zach Bublil'
@@ -34,7 +34,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"bint
+        versionName "1.0.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
