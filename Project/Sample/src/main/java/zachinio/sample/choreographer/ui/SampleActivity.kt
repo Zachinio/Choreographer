@@ -15,12 +15,13 @@ class SampleActivity : Activity() {
         setContentView(R.layout.activity_main)
 
         Choreographer()
-            .addAnimation(EnterAnimation(helloWorld, EnterAnimation.Direction.TOP, 560))
-            .addAnimation(FadeAnimation(childView,0.2f,560))
+            .addAnimation(EnterAnimation(helloWorld, Direction.TOP, 560))
+            .addAnimation(FadeAnimation(childView, 0.2f, 560))
             .addAnimationAsync(ScaleAnimation(childView, 0.5f, 0.5f, 560))
             .addAnimation(BounceAnimation(childView2, 50))
-            .addAnimation(FadeAnimation(childView,1f,560))
-            .addAnimation(MoveAnimation(helloWorld,100,null,500))
+            .addAnimation(FadeAnimation(childView, 1f, 560))
+            .addAnimation(MoveAnimation(helloWorld, 100, null, 500))
+            .addAnimation(ProgressImageLoader(childView,500,Direction.BOTTOM))
             .animate()
     }
 }

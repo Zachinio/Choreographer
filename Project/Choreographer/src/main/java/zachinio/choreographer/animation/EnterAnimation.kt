@@ -55,8 +55,4 @@ class EnterAnimation(view: View, private val direction: Direction, private val d
             Direction.LEFT -> viewWeak.get()?.x = 0 - viewWeak.get()?.width?.toFloat()!!
         }
     }
-
-    enum class Direction {
-        TOP, RIGHT, BOTTOM, LEFT
-    }
 }
