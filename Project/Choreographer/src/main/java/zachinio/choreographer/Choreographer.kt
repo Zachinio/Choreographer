@@ -3,6 +3,7 @@ package zachinio.choreographer
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import zachinio.choreographer.animation.Animation
+import zachinio.choreographer.animation.SideEffect
 
 class Choreographer {
 
@@ -23,6 +24,11 @@ class Choreographer {
             throw IllegalStateException("wait must be used after addAnimation")
         }
         animations.last().wait = mills
+        return this
+    }
+
+    fun runSideEffect(runnable: Runnable): Choreographer {
+        animations.add(SideEffect(runnable))
         return this
     }
 
