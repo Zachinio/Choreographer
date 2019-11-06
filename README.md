@@ -36,6 +36,16 @@ To add delay between animations
             .animate()
 ```
 
+To add a side effect between animations
+```
+   Choreographer()
+            .addAnimation(EnterAnimation(view, EnterAnimation.Direction.TOP, 560))
+            .runSideEffect(runnable) 
+            .addAnimation(FadeAnimation(otherView,0.2f,560))
+            .addAnimationAsync(ScaleAnimation(otherView, 0.5f, 0.5f, 560))
+            .animate()
+```
+
 # Customize animations
 The library contains some basic animations, if you want to chain a custom animation you can do it by extending from Animation class of the library and perform the animation inside the "animate" method.
 
